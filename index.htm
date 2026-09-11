@@ -1,0 +1,1120 @@
+```html
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>NOCCO — Find Your Flavor</title>
+
+  <meta
+    name="description"
+    content="En modern NOCCO-inspirerad produktpresentation."
+  >
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --black: #050505;
+      --dark: #0b0b0b;
+      --gray: #151515;
+      --light: #f5f5f5;
+      --muted: #a8a8a8;
+      --accent: #d7ff00;
+      --accent-dark: #9dbd00;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--black);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* NAVBAR */
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 22px 6%;
+
+      background: rgba(5, 5, 5, 0.75);
+      backdrop-filter: blur(18px);
+
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .logo {
+      font-size: 30px;
+      font-weight: 1000;
+      letter-spacing: -2px;
+      font-style: italic;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    nav ul {
+      display: flex;
+      gap: 35px;
+      list-style: none;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: 0.25s;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+
+      padding: 140px 8% 80px;
+
+      position: relative;
+      overflow: hidden;
+
+      background:
+        radial-gradient(circle at 75% 45%, rgba(215,255,0,0.15), transparent 28%),
+        radial-gradient(circle at 20% 80%, rgba(255,255,255,0.05), transparent 25%),
+        var(--black);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 650px;
+      height: 650px;
+      border-radius: 50%;
+
+      border: 1px solid rgba(215,255,0,0.12);
+
+      right: -200px;
+      top: 100px;
+
+      animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .hero-content {
+      max-width: 720px;
+      z-index: 2;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-weight: 900;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(60px, 9vw, 135px);
+      line-height: 0.82;
+      letter-spacing: -8px;
+      text-transform: uppercase;
+      font-weight: 1000;
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+      display: block;
+    }
+
+    .hero p {
+      margin-top: 35px;
+      max-width: 520px;
+      color: #bdbdbd;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+      margin-top: 35px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 16px 25px;
+
+      border-radius: 100px;
+
+      text-decoration: none;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 1px;
+
+      transition: 0.25s;
+    }
+
+    .button-primary {
+      background: var(--accent);
+      color: black;
+    }
+
+    .button-primary:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 35px rgba(215,255,0,0.2);
+    }
+
+    .button-secondary {
+      border: 1px solid #444;
+      color: white;
+    }
+
+    .button-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* MARQUEE */
+
+    .marquee {
+      background: var(--accent);
+      color: black;
+
+      overflow: hidden;
+      white-space: nowrap;
+
+      padding: 13px 0;
+
+      font-size: 14px;
+      font-weight: 1000;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .marquee-track {
+      display: inline-block;
+      animation: marquee 22s linear infinite;
+    }
+
+    .marquee span {
+      margin: 0 30px;
+    }
+
+    @keyframes marquee {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* PRODUCTS */
+
+    .products-section {
+      padding: 120px 7%;
+      background: #080808;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(45px, 6vw, 80px);
+      line-height: 0.9;
+      text-transform: uppercase;
+      letter-spacing: -4px;
+    }
+
+    .section-header p {
+      color: #999;
+      max-width: 400px;
+      line-height: 1.6;
+    }
+
+    .filters {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 35px;
+    }
+
+    .filter {
+      background: #151515;
+      color: #aaa;
+
+      border: 1px solid #292929;
+      border-radius: 100px;
+
+      padding: 10px 18px;
+
+      cursor: pointer;
+
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 11px;
+
+      transition: 0.2s;
+    }
+
+    .filter:hover,
+    .filter.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: black;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .product-card {
+      position: relative;
+
+      min-height: 470px;
+
+      border-radius: 22px;
+      overflow: hidden;
+
+      background:
+        radial-gradient(circle at 50% 25%, rgba(255,255,255,0.12), transparent 28%),
+        linear-gradient(145deg, #181818, #090909);
+
+      border: 1px solid #242424;
+
+      padding: 28px;
+
+      transition: 0.35s;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(215,255,0,0.5);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.45);
+    }
+
+    .product-card.hidden {
+      display: none;
+    }
+
+    .tag {
+      display: inline-block;
+      width: fit-content;
+
+      background: var(--accent);
+      color: black;
+
+      padding: 7px 12px;
+      border-radius: 100px;
+
+      font-size: 10px;
+      font-weight: 1000;
+      text-transform: uppercase;
+    }
+
+    .can {
+      width: 115px;
+      height: 300px;
+
+      margin: 0 auto;
+
+      border-radius: 28px;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(0,0,0,0.5),
+          rgba(255,255,255,0.18),
+          rgba(0,0,0,0.35)
+        ),
+        var(--can-color);
+
+      box-shadow:
+        0 25px 45px rgba(0,0,0,0.5),
+        inset 8px 0 15px rgba(255,255,255,0.08);
+
+      transform: rotate(-8deg);
+
+      position: relative;
+
+      transition: 0.4s;
+    }
+
+    .product-card:hover .can {
+      transform: rotate(-2deg) translateY(-10px);
+    }
+
+    .can::after {
+      content: "NOCCO";
+
+      position: absolute;
+
+      top: 50%;
+      left: 50%;
+
+      transform: translate(-50%, -50%) rotate(90deg);
+
+      font-size: 29px;
+      font-weight: 1000;
+      letter-spacing: -2px;
+
+      color: white;
+    }
+
+    .product-info h3 {
+      font-size: 27px;
+      margin-bottom: 6px;
+    }
+
+    .product-info p {
+      color: #888;
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .product-button {
+      width: 100%;
+
+      border: none;
+      border-radius: 100px;
+
+      padding: 14px;
+
+      background: white;
+      color: black;
+
+      font-weight: 900;
+      cursor: pointer;
+
+      transition: 0.2s;
+    }
+
+    .product-button:hover {
+      background: var(--accent);
+    }
+
+    /* FEATURE */
+
+    .feature {
+      padding: 130px 7%;
+
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+
+      background:
+        linear-gradient(90deg, #080808, #101010);
+    }
+
+    .feature h2 {
+      font-size: clamp(45px, 6vw, 90px);
+      text-transform: uppercase;
+      line-height: 0.88;
+      letter-spacing: -5px;
+    }
+
+    .feature h2 span {
+      color: var(--accent);
+    }
+
+    .feature-text {
+      color: #999;
+      line-height: 1.8;
+      font-size: 16px;
+      margin-top: 25px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 40px;
+    }
+
+    .stat {
+      background: #171717;
+      border: 1px solid #242424;
+      border-radius: 18px;
+      padding: 25px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 35px;
+      color: var(--accent);
+    }
+
+    .stat span {
+      color: #888;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    /* FOOTER */
+
+    footer {
+      padding: 60px 7% 30px;
+      background: black;
+      border-top: 1px solid #222;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    footer h3 {
+      font-size: 28px;
+      font-style: italic;
+    }
+
+    footer p {
+      color: #666;
+      margin-top: 10px;
+      max-width: 450px;
+      line-height: 1.5;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 25px;
+    }
+
+    .footer-links a {
+      color: #aaa;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    .copyright {
+      border-top: 1px solid #222;
+      margin-top: 50px;
+      padding-top: 20px;
+      color: #555;
+      font-size: 12px;
+    }
+
+    /* POPUP */
+
+    .modal {
+      position: fixed;
+      inset: 0;
+
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(10px);
+
+      display: none;
+      align-items: center;
+      justify-content: center;
+
+      z-index: 2000;
+
+      padding: 20px;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-box {
+      max-width: 500px;
+      width: 100%;
+
+      background: #151515;
+
+      border: 1px solid #333;
+      border-radius: 25px;
+
+      padding: 35px;
+
+      box-shadow: 0 30px 100px rgba(0,0,0,0.7);
+    }
+
+    .modal-box h2 {
+      font-size: 35px;
+      margin-bottom: 15px;
+    }
+
+    .modal-box p {
+      color: #999;
+      line-height: 1.7;
+    }
+
+    .close {
+      margin-top: 25px;
+      width: 100%;
+
+      padding: 14px;
+
+      border: none;
+      border-radius: 100px;
+
+      background: var(--accent);
+      color: black;
+
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 900px) {
+
+      nav ul {
+        display: none;
+      }
+
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .feature {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      .hero {
+        padding-left: 6%;
+        padding-right: 6%;
+      }
+
+      .hero h1 {
+        letter-spacing: -5px;
+      }
+
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-header {
+        display: block;
+      }
+
+      .section-header p {
+        margin-top: 20px;
+      }
+
+      .feature {
+        padding: 80px 6%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+
+  <nav>
+    <div class="logo">NOCCO<span>.</span></div>
+
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#flavors">Flavors</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- HERO -->
+
+  <section class="hero" id="home">
+
+    <div class="hero-content">
+
+      <div class="eyebrow">
+        Find your flavor
+      </div>
+
+      <h1>
+        TIME TO
+        <span>PERFORM.</span>
+      </h1>
+
+      <p>
+        Utforska olika NOCCO-smaker och hitta din favorit.
+        En modern produktpresentation skapad som ett skolprojekt.
+      </p>
+
+      <div class="hero-buttons">
+        <a class="button button-primary" href="#flavors">
+          Utforska smaker
+        </a>
+
+        <a class="button button-secondary" href="#about">
+          Läs mer
+        </a>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- MARQUEE -->
+
+  <div class="marquee">
+    <div class="marquee-track">
+      <span>NOCCO</span>
+      <span>FIND YOUR FLAVOR</span>
+      <span>NO SUGAR</span>
+      <span>TIME TO PERFORM</span>
+
+      <span>NOCCO</span>
+      <span>FIND YOUR FLAVOR</span>
+      <span>NO SUGAR</span>
+      <span>TIME TO PERFORM</span>
+    </div>
+  </div>
+
+
+  <!-- FLAVORS -->
+
+  <section class="products-section" id="flavors">
+
+    <div class="section-header">
+
+      <div>
+        <div class="eyebrow">Explore</div>
+        <h2>
+          FIND<br>
+          YOUR<br>
+          FLAVOR.
+        </h2>
+      </div>
+
+      <p>
+        Bläddra bland ett urval av NOCCO-smaker.
+        Använd filtreringen för att snabbt hitta rätt kategori.
+      </p>
+
+    </div>
+
+
+    <!-- FILTER -->
+
+    <div class="filters">
+
+      <button class="filter active" data-filter="all">
+        Alla
+      </button>
+
+      <button class="filter" data-filter="frukt">
+        Frukt
+      </button>
+
+      <button class="filter" data-filter="tropical">
+        Tropical
+      </button>
+
+      <button class="filter" data-filter="special">
+        Special
+      </button>
+
+    </div>
+
+
+    <!-- PRODUCT GRID -->
+
+    <div class="product-grid">
+
+      <article class="product-card" data-category="frukt">
+
+        <span class="tag">BCAA</span>
+
+        <div
+          class="can"
+          style="--can-color:#ff496c">
+        </div>
+
+        <div class="product-info">
+          <h3>Miami Strawberry</h3>
+          <p>Fruktig jordgubbskaraktär.</p>
+
+          <button
+            class="product-button"
+            onclick="showProduct('Miami Strawberry')">
+            Visa produkt
+          </button>
+        </div>
+
+      </article>
+
+
+      <article class="product-card" data-category="frukt">
+
+        <span class="tag">BCAA</span>
+
+        <div
+          class="can"
+          style="--can-color:#4d91ff">
+        </div>
+
+        <div class="product-info">
+          <h3>Blue Raspberry</h3>
+          <p>En intensiv och fruktig smak.</p>
+
+          <button
+            class="product-button"
+            onclick="showProduct('Blue Raspberry')">
+            Visa produkt
+          </button>
+        </div>
+
+      </article>
+
+
+      <article class="product-card" data-category="tropical">
+
+        <span class="tag">BCAA</span>
+
+        <div
+          class="can"
+          style="--can-color:#ff9e28">
+        </div>
+
+        <div class="product-info">
+          <h3>Peachango</h3>
+          <p>Persika möter tropiska toner.</p>
+
+          <button
+            class="product-button"
+            onclick="showProduct('Peachango')">
+            Visa produkt
+          </button>
+        </div>
+
+      </article>
+
+
+      <article class="product-card" data-category="frukt">
+
+        <span class="tag">BCAA</span>
+
+        <div
+          class="can"
+          style="--can-color:#ef6428">
+        </div>
+
+        <div class="product-info">
+          <h3>Cherry Berry</h3>
+          <p>Bärig smak med körsbärstoner.</p>
+
+          <button
+            class="product-button"
+            onclick="showProduct('Cherry Berry')">
+            Visa produkt
+          </button>
+        </div>
+
+      </article>
+
+
+      <article class="product-card" data-category="tropical">
+
+        <span class="tag">BCAA</span>
+
+        <div
+          class="can"
+          style="--can-color:#ffc400">
+        </div>
+
+        <div class="product-info">
+          <h3>Golden Grape</h3>
+          <p>Söt och fruktig druvkaraktär.</p>
+
+          <button
+            class="product-button"
+            onclick="showProduct('Golden Grape')">
+            Visa produkt
+          </button>
+        </div>
+
+      </article>
+
+
+      <article class="product-card" data-category="special">
+
+        <span class="tag">Limited</span>
+
+        <div
+          class="can"
+          style="--can-color:#c9a94d">
+        </div>
+
+        <div class="product-info">
+          <h3>Goldiberry</h3>
+          <p>En nyare specialsmak från NOCCO.</p>
+
+          <button
+            class="product-button"
+            onclick="showProduct('Goldiberry')">
+            Visa produkt
+          </button>
+        </div>
+
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <!-- ABOUT -->
+
+  <section class="feature" id="about">
+
+    <div>
+
+      <div class="eyebrow">
+        The concept
+      </div>
+
+      <h2>
+        BUILT FOR
+        <span>PERFORMERS.</span>
+      </h2>
+
+    </div>
+
+    <div>
+
+      <p class="feature-text">
+        NOCCO utvecklades i Sverige och lanserades 2014.
+        Den här sidan är ett fristående skolprojekt som visar
+        hur en modern produktwebbplats kan byggas med HTML,
+        CSS och JavaScript.
+      </p>
+
+      <div class="stats">
+
+        <div class="stat">
+          <strong>2014</strong>
+          <span>Lanserades</span>
+        </div>
+
+        <div class="stat">
+          <strong>100%</strong>
+          <span>Responsiv design</span>
+        </div>
+
+        <div class="stat">
+          <strong>JS</strong>
+          <span>Interaktiva funktioner</span>
+        </div>
+
+        <div class="stat">
+          <strong>∞</strong>
+          <span>Smakfavoriter</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <div class="footer-top">
+
+      <div>
+        <h3>NOCCO.</h3>
+
+        <p>
+          Ett fristående skolprojekt inspirerat av
+          modern dryckesdesign.
+        </p>
+      </div>
+
+      <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#flavors">Flavors</a>
+        <a href="#about">About</a>
+      </div>
+
+    </div>
+
+    <div class="copyright">
+      © 2026 School Project · Not affiliated with NOCCO.
+    </div>
+
+  </footer>
+
+
+  <!-- PRODUCT MODAL -->
+
+  <div class="modal" id="modal">
+
+    <div class="modal-box">
+
+      <h2 id="modalTitle">
+        Product
+      </h2>
+
+      <p>
+        Du har valt den här smaken. I det färdiga
+        skolprojektet kan du använda denna ruta för
+        produktinformation, ingredienser, näringsvärden
+        eller andra fakta.
+      </p>
+
+      <button
+        class="close"
+        onclick="closeModal()">
+        STÄNG
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- JAVASCRIPT -->
+
+  <script>
+
+    /* FILTER */
+
+    const filters = document.querySelectorAll(".filter");
+    const cards = document.querySelectorAll(".product-card");
+
+    filters.forEach(filter => {
+
+      filter.addEventListener("click", () => {
+
+        filters.forEach(btn =>
+          btn.classList.remove("active")
+        );
+
+        filter.classList.add("active");
+
+        const selected =
+          filter.dataset.filter;
+
+        cards.forEach(card => {
+
+          if (
+            selected === "all" ||
+            card.dataset.category === selected
+          ) {
+            card.classList.remove("hidden");
+          } else {
+            card.classList.add("hidden");
+          }
+
+        });
+
+      });
+
+    });
+
+
+    /* PRODUCT MODAL */
+
+    const modal =
+      document.getElementById("modal");
+
+    const modalTitle =
+      document.getElementById("modalTitle");
+
+
+    function showProduct(name) {
+
+      modalTitle.textContent = name;
+
+      modal.classList.add("show");
+
+    }
+
+
+    function closeModal() {
+
+      modal.classList.remove("show");
+
+    }
+
+
+    /* CLOSE WHEN CLICKING OUTSIDE */
+
+    modal.addEventListener("click", event => {
+
+      if (event.target === modal) {
+        closeModal();
+      }
+
+    });
+
+
+    /* ESC KEY */
+
+    document.addEventListener("keydown", event => {
+
+      if (event.key === "Escape") {
+        closeModal();
+      }
+
+    });
+
+  </script>
+
+</body>
+</html>
+```
+
